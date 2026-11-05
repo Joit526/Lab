@@ -1,111 +1,58 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shop</title>
-    <style>
-        @import url("https://fonts.googleapis.com/css?family=Montserrat;wght@200;500&display=swap");
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body{
-            font-family: "Montserrat", sans-serif;
-            font-weight: 200;
-            color: var(--tg-theme-text-color);
-            background: var(--tg-theme-bg-color);
-        }
-        #main {
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 {
-            margin-top: 50px;
-            margin-bottom: 10px;
-        }
-        img{
-            width:70px;
-            margin: 30px auto;
-        }
-        p {
-            width:350px;
-            margin:0 auto;
-        }
-        button{
-            border:0;
-            border-radius: 5px;
-            margin-top:50px;
-            height: 60px;
-            width: 200px;
-            font-size:20px;
-            font-weight:500;
-            cursor: pointer;
-            transition: all 500ms ease;
-            color: var(--tg-theme-button-color);
-            background: var(--tg-theme-button-text-color);
-        }
-
-        button:hover {
-            background: var(--tg-theme-secondary-bg-color);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPACE INVADERS — Arcade</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="main" >
-        <h1>Онлайн магазин</h1>
-        <img src = "https://cdn-icons-png.flaticon.com/512/3595/3595455.png" alt = "shop" >
-        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</p>
-        <button id="buy">Купить</button>
-    </div>
-    <form id="form">
-        <input type="text" placeholder="Имя" id="user_name">
-        <input type="text" placeholder="Email" id="user_email">
-        <input type="text" placeholder="Телефон" id="user_phone">
-        <div id="error"> </div>
-        <button id="order" >Оформить</button>
-    </form>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        let tg = window.Telegram.WebApp; 
-        let buy = document.getElementById("buy");
-        let order = document.getElementById("order");
-        tg.expand();
+  <main class="cabinet">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✦</span> SPACE INVADERS</div>
+      <div class="status"><span class="status-dot"></span> ARCADE SYSTEM ONLINE</div>
+    </header>
 
-        buy.addEventListener("click",() => {
-            document.getElementById("main").style.display = "none";
-            document.getElementById("form").style.display = "block";
-            document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name
-        });
-        order.addEventListener("click", () => {
-            let name = document.getElementById("user_name").value;
-            let email = document.getElementById("user_email").value;
-            let phone = document.getElementById("user_phone").value;
-            if (name.length < 5) {
-                document.getElementById("error").innerText = 'Ошибка в имени';
-                return
-            }
-            if(email.length < 5) {
-                document.getElementById("error").innerText = 'ошибка в email';
-                return;
-            }
-            if (phone.length < 5) {
-                document.getElementById("error").innerText = 'Ошибка в номере телефона';
-                return;
-            }
-            let data = {
-                name: name,
-                email: email,
-                phone: phone
-            }
-            tg.sendData(JSON.stringify(data));
-            tg.close();
-        });
-    </script>
+    <section class="game-shell">
+      <div class="game-heading">
+        <div>
+          <p class="eyebrow">SECTOR 07 · EARTH DEFENSE</p>
+          <h1>Defend the <span>Galaxy</span></h1>
+        </div>
+        <div class="level-badge">LEVEL <strong id="level">01</strong></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span>SCORE</span><strong id="score">000000</strong></div>
+        <div class="stat"><span>BEST</span><strong id="best">000000</strong></div>
+        <div class="stat"><span>LIVES</span><strong id="lives">♥ ♥ ♥</strong></div>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="game" width="800" height="520" aria-label="Игровое поле Space Invaders"></canvas>
+        <div class="overlay" id="overlay">
+          <div class="overlay-card">
+            <div class="pixel-alien">◆</div>
+            <p class="eyebrow" id="overlay-eyebrow">INCOMING TRANSMISSION</p>
+            <h2 id="overlay-title">Ready, pilot?</h2>
+            <p id="overlay-text">Уничтожай захватчиков и защити галактику.</p>
+            <button id="start-btn" class="primary-btn">▶ START GAME</button>
+            <p class="hint">MOVE <kbd>←</kbd> <kbd>→</kbd> &nbsp; FIRE <kbd>SPACE</kbd></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="below-game">
+        <div class="controls"><span class="control-icon">⌨</span><span><b>KEYBOARD</b><small>Стрелки — движение · Space — стрельба</small></span></div>
+        <button id="pause-btn" class="secondary-btn" disabled>Ⅱ PAUSE</button>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2086 GALACTIC DEFENSE CORPS</span>
+      <span>BUILT FOR THE NEXT FRONTIER <b>●</b></span>
+    </footer>
+  </main>
+  <script src="game.js"></script>
 </body>
 </html>
