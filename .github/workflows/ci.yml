@@ -1,0 +1,21 @@
+name: Space Invaders CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run tests
+        run: bash tests/test_site.sh
+
+      - name: Build Docker image
+        run: docker build -t space-invaders:ci .
