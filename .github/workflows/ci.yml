@@ -17,5 +17,17 @@ jobs:
       - name: Run tests
         run: bash tests/test_site.sh
 
-      - name: Build Docker image
-        run: docker build -t space-invaders:ci .
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            joit06/space-invaders:latest
+            joit06/space-invaders:${{ github.sha }}
