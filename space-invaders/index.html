@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPACE INVADERS — Arcade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="cabinet">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✦</span> SPACE INVADERS</div>
+      <div class="status"><span class="status-dot"></span> ARCADE SYSTEM ONLINE</div>
+    </header>
+
+    <section class="game-shell">
+      <div class="game-heading">
+        <div>
+          <p class="eyebrow">SECTOR 07 · EARTH DEFENSE</p>
+          <h1>Defend the <span>Galaxy</span></h1>
+        </div>
+        <div class="level-badge">LEVEL <strong id="level">01</strong></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span>SCORE</span><strong id="score">000000</strong></div>
+        <div class="stat"><span>BEST</span><strong id="best">000000</strong></div>
+        <div class="stat"><span>LIVES</span><strong id="lives">♥ ♥ ♥</strong></div>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="game" width="800" height="520" aria-label="Игровое поле Space Invaders"></canvas>
+        <div class="overlay" id="overlay">
+          <div class="overlay-card">
+            <div class="pixel-alien">◆</div>
+            <p class="eyebrow" id="overlay-eyebrow">INCOMING TRANSMISSION</p>
+            <h2 id="overlay-title">Ready, pilot?</h2>
+            <p id="overlay-text">Уничтожай захватчиков и защити галактику.</p>
+            <button id="start-btn" class="primary-btn">▶ START GAME</button>
+            <p class="hint">MOVE <kbd>←</kbd> <kbd>→</kbd> &nbsp; FIRE <kbd>SPACE</kbd></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="below-game">
+        <div class="controls"><span class="control-icon">⌨</span><span><b>KEYBOARD</b><small>Стрелки — движение · Space — стрельба</small></span></div>
+        <button id="pause-btn" class="secondary-btn" disabled>Ⅱ PAUSE</button>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2086 GALACTIC DEFENSE CORPS</span>
+      <span>BUILT FOR THE NEXT FRONTIER <b>●</b></span>
+    </footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
